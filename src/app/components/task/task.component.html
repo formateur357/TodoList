@@ -1,0 +1,6 @@
+<li [class]="getItemVariant()">
+  <input matInput placeholder="Ex: Faire le menage" [(ngModel)]="task.title">
+  {{ task.id }} : {{ task.title }} : {{task.description}} : {{ task.created | date:'dd/MM/y hh:mm' }}
+  <span [class]="getBadgeVariant()">{{ getComplete() }}</span>
+  <button mat-raised-button color="basic" (click)="toggleComplete()">{{ getButtonText() }}</button>
+</li>
