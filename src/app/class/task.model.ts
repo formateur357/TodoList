@@ -1,6 +1,9 @@
 export class Task {
-  constructor (public id: number, public title: string, public completed: boolean, public description: string, public created: Date) {
-    this.id = id;
+  private static index : number = 0;
+  public id: number;
+
+  constructor (public title: string, public completed: boolean, public description: string, public created: Date) {
+    this.id = Task.index++;
     this.title = title;
     this.completed = completed;
     this.description = description;

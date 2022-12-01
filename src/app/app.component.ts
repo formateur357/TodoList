@@ -9,17 +9,8 @@ import { TodolistService } from './services/todolist.service';
 })
 export class AppComponent {
   public title: string = 'todo';
-  // public tasks!: Task[];
-  // public prom!: Promise<string>;
 
-  constructor(public todo: TodolistService) {
-    // this.prom = new Promise<string>(() => {
-    //   setTimeout(() => {
-    //   }, 1000)
-    //   console.log("ici")
-    //   return "coucou";
-    // })
-  }
+  constructor(public todo: TodolistService) {}
 
   get nbTrue(): number {
     return (this.todo.tasks?.length) ? this.todo.tasks.filter((task) => task.completed).length : 0;

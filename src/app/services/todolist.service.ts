@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Task } from '../class/task.model';
 
 const initialList: Task[] = [
-  new Task(1, "Chauffer le dancefloor", true, "Danser le woogie.", new Date()),
-  new Task(2, "Partir au Hesscape Game", false, "Comment tu t'en sortiras?", new Date(Date.now())),
-  new Task(3, "Apportez des cookies à momie.", true, "Miam des doigts...", new Date("01/01/2020 09:00"))
+  new Task("Chauffer le dancefloor", true, "Danser le woogie.", new Date()),
+  new Task("Partir au Hesscape Game", false, "Comment tu t'en sortiras?", new Date(Date.now())),
+  new Task("Apportez des cookies à momie.", true, "Miam des doigts...", new Date("01/01/2020 09:00"))
 ];
 
 @Injectable({
@@ -12,8 +12,19 @@ const initialList: Task[] = [
 })
 export class TodolistService {
   public tasks: Task[];
+  public prom!: Promise<string>;
 
   constructor() {
-    this.tasks = initialList;
+    this.tasks = [];
+    this.prom = new Promise<string>((resolve) => {
+      setTimeout(() => {
+        this.tasks = initialList;
+        resolve('fini');
+      }, 1000)
+    })
+  }
+
+  public toggleComplete(id: number) {
+    this.tasks[id].completed = !this.tasks[id].completed
   }
 }

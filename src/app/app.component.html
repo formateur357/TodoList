@@ -1,3 +1,4 @@
+<p>Promise : {{ todo.prom | async }}</p>
 <p [ngStyle]="{color: textColor}">Nombres de taches terminees : {{ nbTrue }}/{{ nbTasks }} = {{ percent | number:'1.0-2' }}%</p>
 <div [ngSwitch]="true">
   <h2 *ngSwitchCase="percent > 0 && percent <= 50">Allez du nerf ! !</h2>
@@ -15,5 +16,4 @@
   <mat-icon [matBadge]="nbTrue" matBadgeColor="warn">accessible_forward</mat-icon>
 </div>
 <ng-template #noTaskBlock>Il n'y a aucune tache actuellement.</ng-template>
-<!-- <p>{{ prom | async }}</p> -->
 <!-- [ngClass]="{textBold: isBold()}" -->
