@@ -1,19 +1,2 @@
-<p>Promise : {{ todo.prom | async }}</p>
-<p [ngStyle]="{color: textColor}">Nombres de taches terminees : {{ nbTrue }}/{{ nbTasks }} = {{ percent | number:'1.0-2' }}%</p>
-<div [ngSwitch]="true">
-  <h2 *ngSwitchCase="percent > 0 && percent <= 50">Allez du nerf ! !</h2>
-  <h2 *ngSwitchCase="percent > 50 && percent < 100">Il ne reste presque plus de taf !</h2>
-  <h2 *ngSwitchCase="percent == 100">Fini !!</h2>
-  <h2 *ngSwitchDefault>Quand faut y allez, faut y allez !</h2>
-</div>
-<div *ngIf="this.todo.tasks?.length && !(this.nbTrue == this.nbTasks); else noTaskBlock">
-  <ul>
-    <app-task
-    *ngFor="let task of todo.tasks; trackBy:trackByFunction"
-    [task]="task"
-     ></app-task>
-  </ul>
-  <mat-icon [matBadge]="nbTrue" matBadgeColor="warn">accessible_forward</mat-icon>
-</div>
-<ng-template #noTaskBlock>Il n'y a aucune tache actuellement.</ng-template>
-<!-- [ngClass]="{textBold: isBold()}" -->
+<app-nav></app-nav>
+<app-todo-list></app-todo-list>
