@@ -1,7 +1,6 @@
 <li [class]="getItemVariant()">
   <input matInput placeholder="Ex: Faire le menage" [(ngModel)]="task.title">
-  <a [routerLink]="['/todolist', task.id]" routerLinkActive="active"
-  [routerLinkActiveOptions]="{exact: true}">
+  <a [routerLink]="['/todolist', task.id]">
     <div>
       <p>
         {{ task.id }} : {{ task.title }} :
@@ -10,6 +9,6 @@
       <p>{{task.description}}</p>
       <p>{{ task.created | date:'dd/MM/y hh:mm' }}</p>
     </div>
-    <button mat-raised-button color="basic" (click)="toggleComplete()">{{ getButtonText() }}</button>
   </a>
+  <button mat-raised-button color="basic" (click)="toggleComplete()">{{ getButtonText() }}</button>
 </li>
