@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -6,21 +7,21 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   public isAuth: boolean;
 
-  constructor() {
+  constructor(public router: Router) {
     this.isAuth = false;
   }
 
   public login(): void {
     setTimeout(() => {
       this.isAuth = true;
-      console.log("login")
+      this.router.navigate(['todolist'])
     }, 2000)
   }
 
   public logout(): void {
     setTimeout(() => {
       this.isAuth = false;
-      console.log("logout")
+      this.router.navigate(['login'])
     }, 2000)
   }
 }
