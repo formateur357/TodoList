@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '../class/task.model';
 
 const initialList: Task[] = [
@@ -11,7 +12,9 @@ const initialList: Task[] = [
   providedIn: 'root'
 })
 export class TodolistService {
-  public tasks: Task[];
+  private tasks: Task[];
+  private _tasks = new BehaviorSubject<Task[]>([]);
+  readonly tasks$ = this._tasks.asObservable();
   public prom!: Promise<string>;
 
   constructor() {
@@ -19,13 +22,23 @@ export class TodolistService {
     this.prom = new Promise<string>((resolve) => {
       setTimeout(() => {
         this.tasks = initialList;
+        this.emiter(this.tasks);
         resolve('fini');
       }, 1000)
     })
   }
 
+  public getTasks(): Observable<Task[]> {
+    return this.tasks$;
+  }
+
+  private emiter(tasks: Task[]): void {
+    this._tasks.next(Object.assign([], tasks));
+  }
+
   public toggleComplete(id: number) {
-    this.tasks[id].completed = !this.tasks[id].completed
+    this.tasks[id].completed = !this.tasks[id].completed;
+    this.emiter(this.tasks);
   }
 
   public getTaskById(id: number): Task | null {

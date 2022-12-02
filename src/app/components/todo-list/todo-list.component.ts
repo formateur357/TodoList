@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
+import { Task } from 'src/app/class/task.model';
 import { TodolistService } from 'src/app/services/todolist.service';
 
 @Component({
@@ -6,16 +8,25 @@ import { TodolistService } from 'src/app/services/todolist.service';
   templateUrl: './todo-list.component.html',
   styleUrls: ['./todo-list.component.scss']
 })
-export class TodoListComponent {
+export class TodoListComponent implements OnInit{
+
+  public tasks: Task[] = [];
+  public tasks$!: Observable<Task[]>;
+  public subscribe! : Subscription | undefined;
 
   constructor(public todo: TodolistService) {}
 
+  ngOnInit(): void {
+    this.tasks$ = this.todo.getTasks();
+    this.getTasks();
+  }
+
   get nbTrue(): number {
-    return (this.todo.tasks?.length) ? this.todo.tasks.filter((task) => task.completed).length : 0;
+    return (this.tasks?.length) ? this.tasks.filter((task) => task.completed).length : 0;
   }
 
   get nbTasks(): number {
-    return (this.todo.tasks?.length) ? this.todo.tasks.length : 0;
+    return (this.tasks?.length) ? this.tasks.length : 0;
   }
 
   get percent(): number {
@@ -27,9 +38,14 @@ export class TodoListComponent {
   }
 
   public isBold(): boolean {
-    return this.todo.tasks?.length > 0 ? true : false;
+    return this.tasks?.length > 0 ? true : false;
   }
 
+  getTasks(): void {
+    this.subscribe = this.tasks$.subscribe(tasks => {
+      this.tasks = tasks;
+    });
+  }
 
   trackByFunction(index: number, item: any): string {
     return item.id;

@@ -6,10 +6,10 @@
   <h2 *ngSwitchCase="percent == 100">Fini !!</h2>
   <h2 *ngSwitchDefault>Quand faut y allez, faut y allez !</h2>
 </div>
-<div *ngIf="this.todo.tasks?.length && !(this.nbTrue == this.nbTasks); else noTaskBlock">
+<div *ngIf="this.tasks?.length && !(this.nbTrue == this.nbTasks); else noTaskBlock">
   <ul>
     <app-task
-    *ngFor="let task of todo.tasks; trackBy:trackByFunction"
+    *ngFor="let task of tasks; trackBy:trackByFunction"
     [task]="task"
      ></app-task>
   </ul>
