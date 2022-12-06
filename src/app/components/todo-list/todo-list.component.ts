@@ -12,8 +12,10 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   // propriete recuperant la liste de taches, on l'assigne dans le callback de notre abonnement a l'observable.
   public tasks: Task[] = [];
+
   // propriete recuperant l'observable auquel on peut s'abonner cote composant.
   public tasks$!: Observable<Task[]>;
+
   // propriete qui contient notre abonnement, il nous servira a nous desabonner de l'observable a la destruction du composant
   public subscribe! : Subscription | undefined;
 
@@ -22,14 +24,17 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   // hook qui se declenche juste apres la creation du composant
   ngOnInit(): void {
+
     // on recupere l'observable
     this.tasks$ = this.todo.getTasks();
+
     // on s'abonne a l'observable et on recupere la liste de taches
     this.getTasks();
   }
 
   // hook qui se declenche a la destruction du composant
   ngOnDestroy(): void {
+
     // on se desabonne de l'observable
     this.subscribe?.unsubscribe();
   }
