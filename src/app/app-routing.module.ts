@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
+import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -14,6 +15,7 @@ const routes: Routes = [
       {path: '', component: TodoListComponent, pathMatch: 'full'},
       {path: 'todolist', component: TodoListComponent, pathMatch: 'full'},
       {path: 'todolist/:id', component: TaskDetailsComponent},
+      {path: 'taskform', component: TaskFormComponent}
     ]
   },
   {path: 'login', component: LoginComponent},
