@@ -1,0 +1,9 @@
+<p>New Task :</p>
+<form (ngSubmit)="onSubmit(userform)" #userform="ngForm">
+  <input name="name" ngModel required minlength="5">
+  <select name="completed" ngModel required>
+    <option [value]="1">True</option>
+    <option [value]="0">False</option>
+  </select>
+  <button type="submit" [disabled]="!userform.valid">Send</button>
+</form>

@@ -34,6 +34,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   // hook qui se declenche a la destruction du composant
   ngOnDestroy(): void {
+    console.log(document)
 
     // on se desabonne de l'observable
     this.subscribe?.unsubscribe();

@@ -65,4 +65,10 @@ export class TodolistService {
     // return null;
     return this.tasks.filter(task => task.id == id)[0];
   }
+
+  // ajoute une tache a notre liste de taches, puis emet le changement sur le flux de l'observable.
+  public addTask(task: Task) {
+    this.tasks.push(task);
+    this.emiter(this.tasks);
+  }
 }
