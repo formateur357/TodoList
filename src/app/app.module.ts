@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,6 +17,8 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
     LogoutComponent,
     TaskDetailsComponent,
     NotFoundComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    UserListComponent,
+    UserFormComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,8 @@ import { TaskFormComponent } from './components/task-form/task-form.component';
     FormsModule,
     MatInputModule,
     MatBadgeModule,
-    MatIconModule
+    MatIconModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

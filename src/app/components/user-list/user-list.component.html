@@ -1,0 +1,10 @@
+<ul *ngFor="let user of users; trackBy: trackByFunction">
+    <li><p>Firstname: {{ user.firstName }}</p></li>
+    <li><p>Lastname: {{ user.lastName }}</p></li>
+    <li><p>Email: {{ user.email }}</p></li>
+    <li><p>Team: {{ user.team }}</p></li>
+    <li><p>Skills:</p></li>
+    <ul *ngFor="let skill of user.skills; let i = index; trackBy: trackByFunction">
+        <li>{{ i }} : {{ skill }}</li>
+    </ul>
+</ul>

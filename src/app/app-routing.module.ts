@@ -5,6 +5,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
 import { TaskFormComponent } from './components/task-form/task-form.component';
 import { TodoListComponent } from './components/todo-list/todo-list.component';
+import { UserFormComponent } from './components/user-form/user-form.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -13,6 +15,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: '', component: TodoListComponent, pathMatch: 'full'},
+      {path: 'userlist', component: UserListComponent},
+      {path: 'userform', component: UserFormComponent},
       {path: 'todolist', component: TodoListComponent, pathMatch: 'full'},
       {path: 'todolist/:id', component: TaskDetailsComponent},
       {path: 'taskform', component: TaskFormComponent}
