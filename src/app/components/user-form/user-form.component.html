@@ -6,7 +6,7 @@
     <p *ngIf="firstName?.dirty && firstName?.hasError('required')">
         Firstname is required
     </p>
-    <p *ngIf="firstName?.dirty && firstName?.hasError('minLength') || firstName?.hasError('maxLength')">
+    <p *ngIf="firstName?.dirty && firstName?.hasError('minlength') || firstName?.hasError('maxlength')">
         Firstname must be between 3 and 20 characters.
     </p><hr/>
 
@@ -15,7 +15,7 @@
     <p *ngIf="lastName?.dirty && lastName?.hasError('required')">
         LastName is required.
     </p>
-    <p *ngIf="lastName?.dirty && lastName?.hasError('minLength') || lastName?.hasError('maxLength')">
+    <p *ngIf="lastName?.dirty && lastName?.hasError('minlength') || lastName?.hasError('maxlength')">
         LastName must be between 3 and 20 characters.
     </p><hr/>
 
