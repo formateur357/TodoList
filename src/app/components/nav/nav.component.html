@@ -18,31 +18,13 @@
       </button>
       <button mat-menu-item routerLink="userform">
         <mat-icon>assist_walker</mat-icon>
-        <span>Add user</span></button>
+        <span>Add user</span>
+      </button>
     </mat-menu>
 
     <span>My Todolist</span>
 
-    <button mat-raised-button color="secondary" *ngIf="!auth.isAuth; else elseBlock" (click)="auth.login()">Login</button>
+    <app-login *ngIf="!auth.isAuth; else elseBlock" (click)="auth.login()">Login</app-login>
     <ng-template #elseBlock><app-logout></app-logout></ng-template>
   </mat-toolbar>
 </p>
-
-<!-- <ul>
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="login">Authentification</a>
-  </li>
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="todolist">Liste de taches</a>
-  </li>
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="taskform">Creer une tache</a>
-  </li>
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="userlist">Liste d'utilisateurs</a>
-  </li>
-  <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-    <a routerLink="userform">Creer un utilisateur</a>
-  </li>
-</ul>
-<app-logout></app-logout> -->

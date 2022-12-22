@@ -104,7 +104,7 @@
   <mat-form-field class="chip-list" appearance="fill">
     <mat-label>Skills</mat-label>
     <mat-chip-grid #chipGrid aria-label="skills selection">
-      <mat-chip-row *ngFor="let skill of skills" (removed)="remove(skill)">
+      <mat-chip-row *ngFor="let skill of skills" (removed)="removeSkill(skill)">
         {{ skill }}
         <button matChipRemove [attr.aria-label]="'remove ' + skill">
           <mat-icon>cancel</mat-icon>
@@ -112,9 +112,10 @@
       </mat-chip-row>
     </mat-chip-grid>
     <input placeholder="New Skill..." formControlName="skillCtrl"
-      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+      [matChipInputFor]="chipGrid"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-      (matChipInputTokenEnd)="addSkill($event)"/>
+      (matChipInputTokenEnd)="addSkill()"
+      [value]="skillCtrl.value"/>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid"> valider</button>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { TaskDetailsComponent } from './components/task-details/task-details.component';
@@ -10,11 +11,11 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
+  {path: '', component: HomeComponent, pathMatch: 'full'},
   {
     path: '',
     canActivate: [AuthGuard],
     children: [
-      {path: '', component: TodoListComponent, pathMatch: 'full'},
       {path: 'userlist', component: UserListComponent},
       {path: 'userform', component: UserFormComponent},
       {path: 'todolist', component: TodoListComponent, pathMatch: 'full'},
@@ -22,7 +23,7 @@ const routes: Routes = [
       {path: 'taskform', component: TaskFormComponent}
     ]
   },
-  {path: 'login', component: LoginComponent},
+  {path: 'home', component: HomeComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '404'}
 ];

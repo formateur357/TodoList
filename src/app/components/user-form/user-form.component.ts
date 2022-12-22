@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { User } from 'src/app/class/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { MatLegacyChipInputEvent as MatChipInputEvent } from '@angular/material/legacy-chips';
 
 const medium = new RegExp('((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))');
 const strong = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
@@ -73,20 +72,6 @@ export class UserFormComponent {
     // })
   }
 
-  public getPasswordStrength(value: string): void {
-    this.passwordStrength.color = "red";
-    this.passwordStrength.textContent = "weak";
-
-    if(strong.test(value)) {
-      this.passwordStrength.color = "green";
-      this.passwordStrength.textContent = 'Strong';
-    } else if(medium.test(value)) {
-      this.passwordStrength.color = 'orange';
-      this.passwordStrength.textContent = 'Medium';
-    }
-    console.log(this.passwordStrength);
-   }
-
   public get userName(): AbstractControl | null {
     return this.userForm.get('userName');
   }
@@ -127,6 +112,20 @@ export class UserFormComponent {
     return this.userForm?.get('skillCtrl');
   }
 
+  public getPasswordStrength(value: string): void {
+    this.passwordStrength.color = "red";
+    this.passwordStrength.textContent = "weak";
+
+    if(strong.test(value)) {
+      this.passwordStrength.color = "green";
+      this.passwordStrength.textContent = 'Strong';
+    } else if(medium.test(value)) {
+      this.passwordStrength.color = 'orange';
+      this.passwordStrength.textContent = 'Medium';
+    }
+    console.log(this.passwordStrength);
+   }
+
   public isUsernameAvailable(control: AbstractControl | null): any {
     const name: string = control?.value;
     return this.userService.isUsernameAvailable(name);
@@ -152,18 +151,14 @@ export class UserFormComponent {
     return item.id;
   }
 
-  addSkill(event: MatChipInputEvent): void {
-    const value = (event.value || '').trim();
-
+  addSkill(): void {
+    const value = (this.skillCtrl.value || '').trim();
     // Add our skill
     if (value) {
       this.skills.push(value);
     }
-
     // Clear the input value
-    event.chipInput!.clear();
-
-    this.skillCtrl.setValue(null);
+    this.skillCtrl.value = '';
   }
 
   removeSkill(skill: string): void {

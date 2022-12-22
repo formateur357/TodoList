@@ -21,7 +21,7 @@ export class AuthService {
   public logout(): void {
     setTimeout(() => {
       this.isAuth = false;
-      this.router.navigate(['login'])
+      this.router.navigate(['home'])
     }, 2000)
   }
 }
