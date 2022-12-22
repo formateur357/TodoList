@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { User } from 'src/app/class/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -15,7 +15,7 @@ const strong = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent {
-  public userForm: FormGroup;
+  public userForm: UntypedFormGroup;
   public passwordStrength: any;
 
   public skills: string[];
@@ -23,12 +23,12 @@ export class UserFormComponent {
 
 
   // Fonction statique afin de verifier que les deux champs password sont identiques. Retourne null s'il n'y a pas d'erreur et un objet contenant l'erreur sinon.
-  public static checkPassword(group: FormGroup): any {
+  public static checkPassword(group: UntypedFormGroup): any {
     console.log('check');
     return (group.get('password')?.value === group.get('confirmation')?.value) ? null : { matchingError: true };
   }
 
-  constructor(public userService: UserService, public fb: FormBuilder) {
+  constructor(public userService: UserService, public fb: UntypedFormBuilder) {
     this.skills = [];
     this.userForm = this.fb.group({
       userName: this.fb.control(
@@ -132,7 +132,7 @@ export class UserFormComponent {
     return this.userService.isUsernameAvailable(name);
   }
 
-  public onSubmit(userForm: FormGroup): void {
+  public onSubmit(userForm: UntypedFormGroup): void {
     console.log(userForm);
     this.userService.addUser(
       new User(
