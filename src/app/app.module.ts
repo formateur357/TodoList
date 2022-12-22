@@ -28,6 +28,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserFormComponent } from './components/user-form/user-form.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { HomeComponent } from './components/home/home.component';
     UserFormComponent,
     FooterComponent,
     HomeComponent,
+    UserDetailsComponent,
   ],
   imports: [
     BrowserModule,

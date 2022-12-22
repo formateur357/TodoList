@@ -8,7 +8,7 @@ export class AuthService {
   public isAuth: boolean;
 
   constructor(public router: Router) {
-    this.isAuth = false;
+    this.isAuth = true;
   }
 
   public login(): void {
