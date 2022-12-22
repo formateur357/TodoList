@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Task } from 'src/app/class/task.model';
 import { TodolistService } from 'src/app/services/todolist.service';
 
@@ -12,6 +12,16 @@ export class TaskComponent {
   // @Output() public change: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(public todo: TodolistService) {}
+
+  public get source(): string {
+    // let src: string = "../../../assets/img/";
+    // src += (this.task.completed) ? "valid.jpg" : "enCours.jpg";
+    return this.task.completed ? "done" : "incomplete_circle";
+  }
+
+  public get color(): string {
+    return this.task.completed ? "warn" : "primary";
+  }
 
   public toggleComplete(): void {
     this.todo.toggleComplete(this.task.id)

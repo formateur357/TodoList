@@ -1,9 +1,19 @@
-.active a {
-  font-weight: bold;
-  color: darkblue;
+mat-toolbar {
+  min-width: 100vw;
+  display: flex;
+  justify-content: space-between;
 }
 
-a {
-  text-decoration: none;
-  color: purple;
+app-logout, button {
+  font-size: 0.6em;
 }
+
+// .active a {
+//   font-weight: bold;
+//   color: darkblue;
+// }
+
+// a {
+//   text-decoration: none;
+//   color: purple;
+// }

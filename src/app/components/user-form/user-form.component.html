@@ -1,56 +1,121 @@
-<hr/>
+<h1>UserForm</h1>
 <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+  <hr/>
+  <mat-form-field appearance="fill">
+    <mat-label>Username : </mat-label>
+    <input matInput type="text" name="userName" placeholder="Pseudo" formControlName="userName">
+    <mat-progress-spinner
+      *ngIf="userName?.pending"
+      matSuffix
+      diameter="16"
+      style="display: inline-flex"
+      color="warn"
+      mode="indeterminate">
+    </mat-progress-spinner>
+    <mat-error *ngIf="userName?.dirty && userName?.hasError('required')">
+      Username is required
+    </mat-error>
+    <mat-error *ngIf="userName?.dirty && userName?.hasError('minlength') || userName?.hasError('maxlength')">
+        Username must be between 3 and 20 characters.
+    </mat-error>
+    <mat-error *ngIf="userName?.dirty && userName?.hasError('alreadyUsed')">
+      Username already used.
+    </mat-error>
+  </mat-form-field><hr/>
 
-    <label for="firstName">First Name : </label>
-    <input type="text" name="firstName" placeholder="Nom" formControlName="firstName">
-    <p *ngIf="firstName?.dirty && firstName?.hasError('required')">
-        Firstname is required
-    </p>
-    <p *ngIf="firstName?.dirty && firstName?.hasError('minlength') || firstName?.hasError('maxlength')">
+  <mat-form-field appearance="fill">
+    <mat-label>Firstname : </mat-label>
+    <input matInput type="text" name="firstName" placeholder="Nom" formControlName="firstName">
+    <mat-error *ngIf="firstName?.dirty && firstName?.hasError('required')">
+      Firstname is required
+    </mat-error>
+    <mat-error *ngIf="firstName?.dirty && firstName?.hasError('minlength') || firstName?.hasError('maxlength')">
         Firstname must be between 3 and 20 characters.
-    </p><hr/>
+    </mat-error>
+  </mat-form-field><hr/>
 
-    <label for="lastName">Last Name : </label>
-    <input type="text" name="lastName" placeholder="Prénom" formControlName="lastName">
-    <p *ngIf="lastName?.dirty && lastName?.hasError('required')">
-        LastName is required.
-    </p>
-    <p *ngIf="lastName?.dirty && lastName?.hasError('minlength') || lastName?.hasError('maxlength')">
-        LastName must be between 3 and 20 characters.
-    </p><hr/>
+  <mat-form-field appearance="fill">
+    <mat-label>Lastname : </mat-label>
+    <input matInput type="text" name="lastName" placeholder="Prenom" formControlName="lastName">
+    <mat-error *ngIf="lastName?.dirty && lastName?.hasError('required')">
+      Lastname is required
+    </mat-error>
+    <mat-error *ngIf="lastName?.dirty && lastName?.hasError('minlength') || lastName?.hasError('maxlength')">
+        Lastname must be between 3 and 20 characters.
+    </mat-error>
+  </mat-form-field><hr/>
 
-    <label for="email">Email : </label>
-    <input type="text" name="email" placeholder="email" formControlName="email">
-    <p *ngIf="email?.dirty && email?.hasError('required')">
-        Email is required.
-    </p>
-    <p *ngIf="email?.dirty && email?.hasError('email')">
+  <mat-form-field appearance="fill">
+    <mat-label>Age : </mat-label>
+    <input matInput type="number" name="age" placeholder="Age" formControlName="age">
+    <mat-error *ngIf="age?.dirty && age?.hasError('required')">
+      Age is required.
+    </mat-error>
+    <mat-error *ngIf="age?.dirty && age?.hasError('min') || age?.hasError('max')">
+        Age must be between 18 and 99.
+    </mat-error>
+  </mat-form-field><hr/>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email : </mat-label>
+    <input matInput type="text" name="email" placeholder="Email" formControlName="email">
+    <mat-error *ngIf="email?.dirty && email?.hasError('required')">
+      Email is required.
+    </mat-error>
+    <mat-error *ngIf="email?.dirty && email?.hasError('email')">
         The email must be correctly formatted.\n
         Ex: Jeandu13@live.fr
-    </p><hr/>
+    </mat-error>
+  </mat-form-field><hr/>
 
-    <label for="team">Team : </label>
-    <select name="team" id="team" formControlName="team">
-        <option value="">--Please choose an option--</option>
-        <option value="equipe1">equipe1</option>
-        <option value="equipe2">equipe2</option>
-    </select>
-    <p *ngIf="team?.dirty && team?.hasError('required')">
-        Select a team.
-    </p><hr/>
+  <div formGroupName="passwordGroup" class="group">
+    <mat-form-field appearance="fill">
+      <mat-label>Password : </mat-label>
+      <input matInput [ngStyle]="{borderColor: passwordStrength.borderColor}" type="password" name="password" placeholder="Password" formControlName="password">
+      <span [style.color]="passwordStrength.color">Strength: {{ passwordStrength.textContent }}</span>
+      <mat-error *ngIf="password?.dirty && password?.hasError('required')">
+          Password is required
+      </mat-error>
+    </mat-form-field><br/>
+    <mat-form-field appearance="fill">
+      <mat-label>Password Confirmation : </mat-label>
+      <input matInput name="confirmation" placeholder="Password Confirmation" type="password" formControlName="confirmation">
+      <mat-error *ngIf="confirmation?.dirty && confirmation?.hasError('required')">
+        Password Confirmation is required
+      </mat-error>
+    </mat-form-field>
+    <mat-error *ngIf="passwordGroup.dirty && passwordGroup.hasError('matchingError')">
+      Confirm your password
+    </mat-error>
+  </div><hr/>
 
-    <label for="skills">Skills : </label>
-    <ul formArrayName="skills" name="skills" *ngFor="let skill of skills.controls; let i = index; trackBy: trackByFunction">
-        <li>
-            <label>{{ i }}</label>
-            <input type="text" placeholder="Nouveau skill" [formControlName]="i" [value]="skill.value">
-            <p *ngIf="skill?.dirty && skill?.hasError('required')">
-                Ex: Fishing with explosive.
-            </p>
-            <button mat-raised-button type="button" (click)="removeSkill(i)">remove Skill</button>
-        </li>
-    </ul><hr/>
+  <mat-form-field appearance="fill">
+    <mat-label>Team :</mat-label>
+    <mat-select name="team" id="team" formControlName="team">
+      <mat-option value="">--Please choose an option--</mat-option>
+      <mat-option value="equipe1">equipe1</mat-option>
+      <mat-option value="equipe2">equipe2</mat-option>
+    </mat-select>
+    <mat-error *ngIf="team?.dirty && team?.hasError('required')">
+      Select a team.
+    </mat-error>
+  </mat-form-field><hr/>
 
-    <button mat-raised-button color="secondary" type="button" (click)="addSkill()">Ajouter un skill</button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid"> valider</button>
+  <mat-form-field class="chip-list" appearance="fill">
+    <mat-label>Skills</mat-label>
+    <mat-chip-grid #chipGrid aria-label="skills selection">
+      <mat-chip-row *ngFor="let skill of skills" (removed)="remove(skill)">
+        {{ skill }}
+        <button matChipRemove [attr.aria-label]="'remove ' + skill">
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip-row>
+    </mat-chip-grid>
+    <input placeholder="New Skill..." formControlName="skillCtrl"
+      [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="addSkill($event)"/>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid"> valider</button>
 </form>

@@ -6,7 +6,7 @@ import { Task } from '../class/task.model';
 const initialList: Task[] = [
   new Task("Chauffer le dancefloor", true, "Danser le woogie.", new Date()),
   new Task("Partir au Hesscape Game", false, "Comment tu t'en sortiras?", new Date(Date.now())),
-  new Task("Apportez des cookies à momie.", true, "Miam des doigts...", new Date("01/01/2020 09:00"))
+  new Task("Apportez des cookies à momie dans son sarcophage.", true, "Miam des doigts...", new Date("01/01/2020 09:00"))
 ];
 
 @Injectable({
@@ -23,18 +23,18 @@ export class TodolistService {
   readonly tasks$ = this._tasks.asObservable();
 
   // propriete contenant le message renvoye par la promise.
-  public prom!: Promise<string>;
+  // public prom!: Promise<string>;
 
   // Dans le constructor on initialise notre liste de taches d'abord en tant que liste vide puis dans le callback de notre promise on assigne initialList à notre liste de taches, puis on emet la liste de taches dans le flux de l'observable grace a la methode emiter de notre service.
   constructor() {
     this.tasks = [];
-    this.prom = new Promise<string>((resolve) => {
-      setTimeout(() => {
+    // this.prom = new Promise<string>((resolve) => {
+    //   setTimeout(() => {
         this.tasks = initialList;
         this.emiter(this.tasks);
-        resolve('fini');
-      }, 1000)
-    })
+    //     resolve('fini');
+    //   }, 1000)
+    // })
   }
 
   // methode qui renvoie l'observable aux composants souhaitant l'utiliser afin de s'abonner au flux.

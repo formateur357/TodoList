@@ -1,4 +1,4 @@
-<li [class]="getItemVariant()">
+<!-- <li [class]="getItemVariant()">
   <input matInput placeholder="Ex: Faire le menage" [(ngModel)]="task.title">
   <a [routerLink]="['/todolist', task.id]">
     <div>
@@ -11,4 +11,36 @@
     </div>
   </a>
   <button mat-raised-button color="basic" (click)="toggleComplete()">{{ getButtonText() }}</button>
+</li> -->
+
+<li>
+  <a [routerLink]="['/todolist', task.id]">
+    <mat-card class="example-card"  [class]="getItemVariant()">
+      <mat-card-header>
+        <mat-card-title>
+          <div>{{ task.title }}</div>
+          <div>
+            <img src="../../../assets/img/icone_todolist.jpeg" mat-card-avatar />
+            {{ task.id }}
+          </div>
+        </mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header><hr />
+      <!-- <mat-icon aria-hidden="false" aria-label="Example home icon" [fontIcon]="source"></mat-icon> -->
+      <!-- <img mat-card-image style="width: 150px;" [src]="source" alt=""> -->
+      <mat-card-content>
+        <p>
+          {{task.description}}
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button [color]="color" (click)="toggleComplete()">{{ getButtonText() }}</button>
+      </mat-card-actions><hr />
+
+      <mat-card-footer>
+        {{ task.created | date:'dd/MM/y hh:mm' }}
+      </mat-card-footer>
+    </mat-card>
+  </a>
 </li>

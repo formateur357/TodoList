@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, debounceTime, delay, Observable, of } from 'rxjs';
 import { User } from '../class/user.model';
 
 const initialList = [
-  new User("Jean", "Jean", "jean@jean.jean", "jeannot", ["Sait dire son nom", "et son prenom"])
+  new User("JeannotLeConquerant", "Jean", "Jean", 57, "jean@jean.jean", "Aa0000!","jeannot", ["Sait dire son nom", "et son prenom"])
 ]
 
 @Injectable({
@@ -39,5 +39,10 @@ export class UserService {
     this.users.push(user);
     this.emiter(this.users);
     this.router.navigate(['userlist']);
+  }
+
+  public isUsernameAvailable(name: string): Observable<any> {
+    let obs: Observable<any> =  (this.users.filter((user: User) => user.userName === name).length > 0) ? of({ alreadyUsed: true }) : of(null);
+    return obs.pipe(delay(3000));
   }
 }

@@ -1,2 +1,2 @@
-<button *ngIf="!auth.isAuth; else elseBlock" color="primary" (click)="auth.login()">Login</button>
+<button mat-raised-button color="secondary" *ngIf="!auth.isAuth; else elseBlock" (click)="auth.login()">Login</button>
 <ng-template #elseBlock><p>Vous êtes déjà connecté !!</p></ng-template>
