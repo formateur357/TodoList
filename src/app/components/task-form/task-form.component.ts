@@ -16,9 +16,12 @@ export class TaskFormComponent implements OnInit {
   ngOnInit(): void {}
 
   // appelle la methode addTask de notre service todolist, en lui fournissant une nouvelle tache construite à partir des inputs de notre formulaire, puis nous redirige vers le composant todolist.
-  onSubmit(userform: NgForm): void {
+  onSubmit(taskform: NgForm): void {
     this.todo.addTask(
-      new Task(userform.value.title, (userform.value.completed == 0) ? false : true, userform.value.description, new Date())
+      new Task(
+        taskform.value.title,
+        (taskform.value.completed == 0) ? false : true,
+        taskform.value.description, new Date())
     );
     this.router.navigate(['todolist']);
   }

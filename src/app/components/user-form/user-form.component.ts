@@ -16,6 +16,8 @@ const strong = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?
 export class UserFormComponent {
   public userForm: UntypedFormGroup;
   public passwordStrength: any;
+  public visibility: string;
+  public visibilityIcon: string;
 
   public skills: string[];
   public separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -28,6 +30,8 @@ export class UserFormComponent {
   }
 
   constructor(public userService: UserService, public fb: UntypedFormBuilder) {
+    this.visibility = "password";
+    this.visibilityIcon = "visibility"
     this.skills = [];
     this.userForm = this.fb.group({
       userName: this.fb.control(
@@ -147,11 +151,11 @@ export class UserFormComponent {
     )
   }
 
-  trackByFunction(index: number, item: any): string {
+  public trackByFunction(index: number, item: any): string {
     return item.id;
   }
 
-  addSkill(): void {
+  public addSkill(): void {
     const value = (this.skillCtrl.value || '').trim();
     // Add our skill
     if (value) {
@@ -161,11 +165,17 @@ export class UserFormComponent {
     this.skillCtrl.value = '';
   }
 
-  removeSkill(skill: string): void {
+  public removeSkill(skill: string): void {
     const index = this.skills.indexOf(skill);
 
     if (index >= 0) {
       this.skills.splice(index, 1);
     }
   }
+
+  public toggleVisibility(): void {
+    this.visibility = (this.visibility === "password") ? "text" : "password";
+    this.visibilityIcon = (this.visibilityIcon === "visibility") ? "visibility_off" : "visibility";
+  }
+
 }

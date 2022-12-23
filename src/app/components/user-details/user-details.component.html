@@ -4,13 +4,10 @@
       <p>{{ user.userName }}</p>
       <div>
         Password: {{ toggle ? user.password : default }}
-        <button mat-icon-button matTooltip="Primary" color="primary" (click)="toggleVisibility()">
+        <button mat-icon-button type="button" matTooltip="Primary" color="primary" (click)="toggleVisibility()">
           <mat-icon>{{ visibility }}</mat-icon>
         </button>
       </div>
-
-      <mat-icon ></mat-icon>
-
     </mat-card-title><hr/>
     <mat-card-subtitle>
       <p>Team: {{ user.team }}</p>
