@@ -8,7 +8,7 @@ export class AuthService {
   public isAuth: boolean;
 
   constructor(public router: Router) {
-    this.isAuth = true;
+    this.isAuth = false;
   }
 
   public login(): void {
@@ -21,7 +21,7 @@ export class AuthService {
   public logout(): void {
     setTimeout(() => {
       this.isAuth = false;
-      this.router.navigate(['home'])
+      this.router.navigate([''])
     }, 2000)
   }
 }

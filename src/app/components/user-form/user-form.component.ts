@@ -22,10 +22,8 @@ export class UserFormComponent {
   public skills: string[];
   public separatorKeysCodes: number[] = [ENTER, COMMA];
 
-
   // Fonction statique afin de verifier que les deux champs password sont identiques. Retourne null s'il n'y a pas d'erreur et un objet contenant l'erreur sinon.
   public static checkPassword(group: UntypedFormGroup): any {
-    console.log('check');
     return (group.get('password')?.value === group.get('confirmation')?.value) ? null : { matchingError: true };
   }
 

@@ -23,7 +23,6 @@ const routes: Routes = [
       {path: 'taskform', component: TaskFormComponent}
     ]
   },
-  {path: 'home', component: HomeComponent},
   {path: '404', component: NotFoundComponent},
   {path: '**', redirectTo: '404'}
 ];
