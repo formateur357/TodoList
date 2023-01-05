@@ -13,11 +13,10 @@ export class UserListComponent implements OnInit, OnDestroy {
   public users$!: Observable<User[]>;
   public subscription!: Subscription;
 
-
-
   constructor(public userService: UserService) {}
 
   public ngOnInit(): void {
+    this.userService.load();
     this.users$ = this.userService.getUsers$();
     this.getUsers();
   }

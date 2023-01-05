@@ -1,11 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, debounceTime, delay, Observable, of } from 'rxjs';
 import { User } from '../class/user.model';
 
-const initialList = [
-  new User("JeannotLeConquerant", "Jean", "Jean", 57, "jean@jean.jean", "Aa0000!","jeannot", ["Sait dire son nom", "et son prenom"])
-]
+// const initialList = [
+//   new User("JeannotLeConquerant", "Jean", "Jean", 57, "jean@jean.jean", "Aa0000!","jeannot", ["Sait dire son nom", "et son prenom"])
+// ]
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +16,34 @@ export class UserService {
   private _users: BehaviorSubject<User[]>;
   readonly users$: Observable<User[]>;
 
-  constructor(public router: Router) {
+  private url: string = "https://todolist-85939-default-rtdb.europe-west1.firebasedatabase.app/";
+
+  constructor(public router: Router, public http: HttpClient) {
     this.users = [];
     this._users = new BehaviorSubject<User[]>([]);
     this.users$ = this._users.asObservable();
-    this.init();
+    // this.init();
   }
 
-  private init(): void {
-    this.users = initialList;
-    this.emiter(this.users);
+  // private init(): void {
+  //   // this.users = initialList;
+  //   this.emiter(this.users);
+  // }
+
+  public save(): void {
+    this.http.put(this.url+"/user.json", this.users).subscribe();
+  }
+
+  public load(): void {
+    this.http.get(this.url+"/user.json").subscribe(response => {
+      this.users = response as User[];
+      this.emiter(this.users);
+    });
   }
 
   private emiter(users: User[]): void {
     this._users.next(Object.assign([], users));
+    this.save();
   }
 
   public getUsers$(): Observable<User[]> {
@@ -39,7 +54,7 @@ export class UserService {
     this.users.push(user);
     this.emiter(this.users);
     this.router.navigate(['userlist']);
-  }
+   }
 
   public isUsernameAvailable(name: string): Observable<any> {
     let obs: Observable<any> =  (this.users.filter((user: User) => user.userName === name).length > 0) ? of({ alreadyUsed: true }) : of(null);

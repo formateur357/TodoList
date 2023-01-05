@@ -25,6 +25,12 @@ export class TodoListComponent implements OnInit, OnDestroy {
   // hook qui se declenche juste apres la creation du composant
   ngOnInit(): void {
 
+    // stock les donnees dans la bdd
+    // this.todo.save();
+
+    // charge les donnees stockees dans la bdd
+    this.todo.load();
+
     // on recupere l'observable
     this.tasks$ = this.todo.getTasks();
 

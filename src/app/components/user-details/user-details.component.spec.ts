@@ -20,4 +20,9 @@ describe('UserDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('must have a visibility set to visibility', () => {
+    expect(component.visibility).toEqual('visibility');
+  });
+
 });
